@@ -1,0 +1,112 @@
+<?php
+interface DeckInterface {
+	public function shuffle();
+	
+	public function dealCard($card);
+}
+
+class Card {
+	private string $rank;
+	private string $suit;
+	public function __construct(string $rank, string $suit) {
+		$this->rank = $rank;
+		$this->suit = $suit;
+	}
+	
+	public function getRank(): string {
+		return $this->rank;
+	}
+	
+	public function getSuit(): string {
+		return $this->suit;
+	}
+}
+
+final class Deck implements DeckInterface {
+	
+	private array $cards;
+	
+	private array $suits;
+	
+	private array $elements;
+
+
+public function __construct() {
+ 	$this->suits = ["♥", "♦", "♣", "♠"];
+ 	$this->elements = ["6","7","8","9","10","J","Q","K","T"];
+ 	
+ 	foreach($this->elements as $rank) {
+ 	foreach($this->suits as $suit) {
+ 	//this->card[] = $rank . $suit;
+ 		$this->card[] = new Card($rank, $suit);
+ 		}	
+ 	}
+ 	
+ 	$this->shuffle();
+ }
+ 
+ public function shuffle(): void {
+ 	shuffle($this->card);
+ }
+ 
+ public function dealCard() {
+ 	return array_shift($this->cards);
+ }
+ 
+ public function getCards()
+ {
+ 	return $this->card;
+ }
+ 
+}
+ interface PlayerInterface {
+ 	
+ 	public function addCard($card);
+ 	
+ 	public function countCardInHand(): int;
+ }
+ 
+ class Player implements PlayerInterface {
+ 	
+ 	private array $hand;
+ 	
+ 	public function __construct() {
+ 		$this->hand = [];
+ 	}
+ 	public function addCard($card) {
+ 		$this->hand[] = $card;
+ 		
+ 	}
+ 	public function countCardInHand(): int {
+ 		return count ($this->hand);
+ 	}
+ }
+ 
+ class Game 
+ {
+ 	private Deck $deck;
+ 	
+ 	private Player $firstPlayer;
+ 	
+ 	private Player $secondPlayer;
+
+ 	
+ 	public function __construct()
+ 	{
+ 		$this->deck = new Deck();
+ 		
+ 		$this->firstPlayer = new Player();
+ 		
+ 		$this->second = new Player();
+ 	}
+ 	
+ 	public function play() {
+ 		while($this->deck->getCards()) {
+ 			print 1;
+ 		}
+    	
+    }
+ }
+ 		
+ $game = new Game();
+ var_dump($game->play());
